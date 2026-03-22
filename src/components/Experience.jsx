@@ -49,7 +49,7 @@ export default function Experience() {
     <section
       id="experience"
       className="relative z-10"
-      style={{ background:'linear-gradient(180deg,transparent,rgba(0,212,255,0.02),transparent)' }}
+      style={{ background:'linear-gradient(180deg,transparent,rgba(8,145,178,0.025),transparent)' }}
     >
       <div className="max-w-3xl mx-auto px-6 py-28">
 

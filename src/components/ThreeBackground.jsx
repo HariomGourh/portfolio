@@ -6,7 +6,7 @@ import * as THREE from 'three'
  * ───────────────
  * Fixed full-screen canvas behind all content.
  * Contains:
- *  • 3000 coloured particles (cyan / violet / coral)
+ *  • 3000 coloured particles (cyan / violet / coral)  — tuned for light bg
  *  • 5 rotating wireframe geometries
  *  • Mouse-parallax camera movement
  */
@@ -37,17 +37,18 @@ export default function ThreeBackground() {
       pos[i * 3 + 1] = (Math.random() - 0.5) * 22
       pos[i * 3 + 2] = (Math.random() - 0.5) * 22
       const r = Math.random()
-      if (r < 0.5)      { col[i*3]=0;    col[i*3+1]=0.83; col[i*3+2]=1    } // cyan
-      else if (r < 0.82){ col[i*3]=0.55; col[i*3+1]=0.36; col[i*3+2]=0.97 } // violet
-      else               { col[i*3]=1;    col[i*3+1]=0.42; col[i*3+2]=0.42 } // coral
+      /* Deeper, more saturated colours that read well on white */
+      if (r < 0.5)       { col[i*3]=0.03; col[i*3+1]=0.57; col[i*3+2]=0.69 } // teal  #0891b2
+      else if (r < 0.82) { col[i*3]=0.49; col[i*3+1]=0.23; col[i*3+2]=0.93 } // violet #7c3aed
+      else                { col[i*3]=0.88; col[i*3+1]=0.11; col[i*3+2]=0.28 } // coral  #e11d48
     }
 
     geo.setAttribute('position', new THREE.BufferAttribute(pos, 3))
     geo.setAttribute('color',    new THREE.BufferAttribute(col, 3))
 
     const mat = new THREE.PointsMaterial({
-      size: 0.022, vertexColors: true,
-      transparent: true, opacity: 0.65, sizeAttenuation: true,
+      size: 0.026, vertexColors: true,
+      transparent: true, opacity: 0.38, sizeAttenuation: true,
     })
     const particles = new THREE.Points(geo, mat)
     scene.add(particles)
@@ -61,11 +62,12 @@ export default function ThreeBackground() {
       new THREE.TorusGeometry(0.42, 0.13, 8, 24),
       new THREE.DodecahedronGeometry(0.5),
     ]
-    const shapeColors = [0x00d4ff, 0x8b5cf6, 0xff6b6b, 0xffd93d, 0x4ade80]
+    /* Shapes use same palette but even lower opacity */
+    const shapeColors = [0x0891b2, 0x7c3aed, 0xe11d48, 0xd97706, 0x22c55e]
 
     geoList.forEach((g, i) => {
       const m = new THREE.MeshBasicMaterial({
-        color: shapeColors[i], wireframe: true, opacity: 0.12, transparent: true,
+        color: shapeColors[i], wireframe: true, opacity: 0.07, transparent: true,
       })
       const mesh = new THREE.Mesh(g, m)
       mesh.position.set(

@@ -8,11 +8,11 @@ const SKILLS = [
 
   { icon:'🧠', name:'Data Structures & Algorithms', desc:'Problem solving using arrays, recursion, trees, graphs and more', pct:70, bar:'linear-gradient(90deg,var(--amber),var(--coral))', pctColor:'var(--amber)' },
 
-  { icon:'📊', name:'Data Analysis', desc:'Working with datasets using NumPy, Pandas and data cleaning techniques', pct:85, bar:'linear-gradient(90deg,#4ade80,var(--cyan))', pctColor:'#4ade80' },
+  { icon:'📊', name:'Data Analysis', desc:'Working with datasets using NumPy, Pandas and data cleaning techniques', pct:85, bar:'linear-gradient(90deg,#16a34a,var(--cyan))', pctColor:'#16a34a' },
 
-  { icon:'📈', name:'Data Visualization', desc:'Creating insights using Matplotlib, Seaborn, Power BI', pct:75, bar:'linear-gradient(90deg,#f59e0b,var(--coral))', pctColor:'#f59e0b' },
+  { icon:'📈', name:'Data Visualization', desc:'Creating insights using Matplotlib, Seaborn, Power BI', pct:75, bar:'linear-gradient(90deg,var(--amber),var(--coral))', pctColor:'var(--amber)' },
 
-  { icon:'🤖', name:'Machine Learning', desc:'Understanding core ML algorithms like Regression, Decision Trees and KNN with practical implementation', pct:70, bar:'linear-gradient(90deg,var(--cyan),#a78bfa)', pctColor:'var(--cyan)' },
+  { icon:'🤖', name:'Machine Learning', desc:'Understanding core ML algorithms like Regression, Decision Trees and KNN with practical implementation', pct:70, bar:'linear-gradient(90deg,var(--cyan),#7c3aed)', pctColor:'var(--cyan)' },
 ]
 
 function SkillCard({ skill, delay }) {
@@ -49,7 +49,7 @@ function SkillCard({ skill, delay }) {
       </div>
 
       {/* Animated bar */}
-      <div className="h-1 rounded-full overflow-hidden" style={{ background:'rgba(255,255,255,0.07)' }}>
+      <div className="h-1.5 rounded-full overflow-hidden" style={{ background:'rgba(15,23,42,0.07)' }}>
         <div
           ref={barRef}
           className="skill-bar-fill"
@@ -67,7 +67,7 @@ export default function Skills() {
     <section
       id="skills"
       className="relative z-10"
-      style={{ background:'linear-gradient(180deg,transparent,rgba(139,92,246,0.03),transparent)' }}
+      style={{ background:'linear-gradient(180deg,transparent,rgba(124,58,237,0.025),transparent)' }}
     >
       <div className="max-w-6xl mx-auto px-6 py-28">
 
@@ -75,7 +75,7 @@ export default function Skills() {
         <div ref={headRef} className="reveal text-center mb-14">
           <div className="section-label justify-center">Expertise</div>
           <h2 className="font-display font-extrabold leading-tight" style={{ fontSize:'clamp(2rem,5vw,3.2rem)' }}>
-          <span className="gradient-text-cv">Skills</span> & Expertise in AI/ML
+          <span className="gradient-text-cv">Skills</span> &amp; Expertise in AI/ML
           </h2>
           <p className="mt-3 text-base max-w-md mx-auto" style={{ color:'var(--muted)' }}>
             Core skills I am developing through real-world projects and continuous learning in AI, Data Science and Machine Learning.

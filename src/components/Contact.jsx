@@ -131,7 +131,7 @@ export default function Contact() {
               type="submit"
               className="btn-primary w-full justify-center mt-1"
               disabled={status !== 'idle'}
-              style={status === 'sent' ? { background:'linear-gradient(135deg,#4ade80,#22d3ee)', opacity:1 } : {}}
+              style={status === 'sent' ? { background:'linear-gradient(135deg,#16a34a,#0891b2)', opacity:1 } : {}}
             >
               <span>
                 {status === 'idle'    && 'Send Message ✦'}

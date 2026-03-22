@@ -12,7 +12,7 @@ const NAV_LINKS = [
  * Navbar
  * ──────
  * • Fixed at top
- * • Becomes glassmorphic after scrolling 50px
+ * • Becomes white glassmorphic after scrolling 50px
  * • Desktop: horizontal links + CTA button
  * • Mobile: hamburger → full-screen overlay menu
  */
@@ -32,9 +32,11 @@ export default function Navbar() {
       <nav
         className="fixed top-0 left-0 right-0 z-[1000] flex justify-between items-center px-10 py-5 transition-all duration-500"
         style={scrolled ? {
-          background:    'rgba(5,5,16,0.82)',
+          background:    'rgba(248,250,252,0.92)',
           backdropFilter:'blur(20px)',
-          borderBottom:  '1px solid rgba(255,255,255,0.07)',
+          WebkitBackdropFilter: 'blur(20px)',
+          borderBottom:  '1px solid rgba(15,23,42,0.08)',
+          boxShadow:     '0 2px 12px rgba(15,23,42,0.07)',
         } : {}}
       >
         {/* Logo */}

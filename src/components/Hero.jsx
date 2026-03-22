@@ -72,9 +72,9 @@ export default function Hero() {
     <section id="hero" className="relative min-h-screen flex items-center px-6 pt-28 pb-16 z-10">
 
       {/* ── Background blobs ── */}
-      <div className="floating-shape" style={{ width:320,height:320, background:'rgba(0,212,255,0.05)',   top:'-80px', right:'-80px',  animationDelay:'0s' }} />
-      <div className="floating-shape" style={{ width:220,height:220, background:'rgba(139,92,246,0.07)', bottom:'8%', left:'-60px',   animationDelay:'2s' }} />
-      <div className="floating-shape" style={{ width:160,height:160, background:'rgba(255,107,107,0.05)',top:'40%',  right:'6%',     animationDelay:'4s' }} />
+      <div className="floating-shape" style={{ width:320,height:320, background:'rgba(8,145,178,0.07)',   top:'-80px', right:'-80px',  animationDelay:'0s' }} />
+      <div className="floating-shape" style={{ width:220,height:220, background:'rgba(124,58,237,0.06)', bottom:'8%', left:'-60px',   animationDelay:'2s' }} />
+      <div className="floating-shape" style={{ width:160,height:160, background:'rgba(225,29,72,0.05)',  top:'40%',  right:'6%',      animationDelay:'4s' }} />
 
       {/* ══ Two-column layout ══ */}
       <div className="max-w-6xl mx-auto w-full grid md:grid-cols-2 gap-14 lg:gap-20 items-center">
@@ -85,7 +85,7 @@ export default function Hero() {
           {/* Status badge */}
           <div className="hero-badge mb-7 w-fit" style={{ animation:'fadeUp 0.9s ease both' }}>
             <span className="badge-dot" />
-            <span>Available for internships & AI/ML opportunities</span>
+            <span>Available for internships &amp; AI/ML opportunities</span>
           </div>
 
           {/* Headline */}
@@ -165,33 +165,33 @@ Focused on DSA, Python and building real-world AI projects in Agriculture and Au
             {/* Outer dashed ring */}
             <div
               className="absolute rounded-full animate-[ringSpin_12s_linear_infinite_reverse]"
-              style={{ width:376, height:376, border:'1px dashed rgba(0,212,255,0.2)' }}
+              style={{ width:376, height:376, border:'1px dashed rgba(8,145,178,0.3)' }}
             />
 
             {/* Violet glow blob */}
             <div
               className="absolute rounded-full"
-              style={{ width:290, height:290, background:'radial-gradient(circle,rgba(139,92,246,0.2) 0%,transparent 70%)', filter:'blur(30px)' }}
+              style={{ width:290, height:290, background:'radial-gradient(circle,rgba(124,58,237,0.1) 0%,transparent 70%)', filter:'blur(30px)' }}
             />
 
             {/* ── Profile image ── */}
             <div
-  className="absolute rounded-full overflow-hidden z-10"
-  style={{
-    width:330,
-    height:330,
-    top:'50%',
-    left:'50%',
-    transform:'translate(-50%, -50%)'
-  }}
->
-  <img
-    src={profileImg}
-    alt="Hariom Gourh"
-    className="w-full h-full object-cover object-[center_top]"
-    onError={() => setImgError(true)}
-  />
-</div>
+              className="absolute rounded-full overflow-hidden z-10"
+              style={{
+                width:330,
+                height:330,
+                top:'50%',
+                left:'50%',
+                transform:'translate(-50%, -50%)'
+              }}
+            >
+              <img
+                src={profileImg}
+                alt="Hariom Gourh"
+                className="w-full h-full object-cover object-[center_top]"
+                onError={() => setImgError(true)}
+              />
+            </div>
 
             {/* ── Floating badge: experience ── */}
             <div

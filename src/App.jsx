@@ -53,7 +53,7 @@ export default function App() {
       {/* ── Footer ── */}
       <footer
         className="relative z-10 text-center py-10 text-sm"
-        style={{ borderTop: '1px solid rgba(255,255,255,0.06)', color: 'var(--muted)' }}
+        style={{ borderTop: '1px solid rgba(15,23,42,0.08)', color: 'var(--muted)' }}
       >
         <p>
           Designed &amp; built with{' '}
@@ -61,7 +61,7 @@ export default function App() {
           <span style={{ color: 'var(--cyan)' }}>Hariom Gourh</span> ·{' '}
           {new Date().getFullYear()}
         </p>
-        <p className="mt-1 text-xs" style={{ color: 'rgba(148,163,184,0.45)' }}>
+        <p className="mt-1 text-xs" style={{ color: 'rgba(100,116,139,0.55)' }}>
           React · Three.js · Tailwind CSS
         </p>
       </footer>

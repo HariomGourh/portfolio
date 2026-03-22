@@ -24,8 +24,8 @@ const STATS = [
  *  Right — 3D tilt glass card with avatar + animated counters
  */
 export default function About() {
-  const textRef    = useReveal()          // fade-up
-  const cardRef    = useReveal()          // fade-up
+  const textRef    = useReveal()
+  const cardRef    = useReveal()
   const counterEls = useRef([])
 
   /* ── 3D Tilt on the card ── */
@@ -80,20 +80,19 @@ export default function About() {
               style={{ fontSize:'clamp(2rem,5vw,3.2rem)' }}
             >
               Passionate about{' '}
-              <span className="gradient-text-cv">AI, Data Science</span> & <span className="gradient-text-cv">Problem Solving</span>
+              <span className="gradient-text-cv">AI, Data Science</span> &amp; <span className="gradient-text-cv">Problem Solving</span>
             </h2>
             <p className="text-base leading-8 mb-4" style={{ color:'var(--muted)' }}>
               I'm a <strong style={{ color:'var(--text)' }}>B.Tech Computer Science</strong> student focused on becoming an <strong style={{ color:'var(--text)' }}>AI/ML Engineer. </strong>
 
-I have strong foundations in <strong style={{ color:'var(--text)' }}>Python, C++, and Data Structures & Algorithms, </strong>and I build real-world projects using <strong style={{ color:'var(--text)' }}>Machine Learning and Data Analysis.</strong>
+I have strong foundations in <strong style={{ color:'var(--text)' }}>Python, C++, and Data Structures &amp; Algorithms, </strong>and I build real-world projects using <strong style={{ color:'var(--text)' }}>Machine Learning and Data Analysis.</strong>
             </p>
             <p className="text-base leading-8 mb-7" style={{ color:'var(--muted)' }}>
               Currently, I am working on projects related to Agriculture AI, Rainfall Prediction, and AI-based systems that solve real-world problems.
 I am continuously improving my skills in Machine Learning, Data Analysis, and real-world AI applications.
 </p>
-<p className="text-base leading-8 mb-7" style={{ color:'var(--muted)' }}>I am actively looking for AI/ML or Data Science internship opportunities.</p> 
+<p className="text-base leading-8 mb-7" style={{ color:'var(--muted)' }}>I am actively looking for AI/ML or Data Science internship opportunities.</p>
 
-            
             {/* Tech chips */}
             <div className="flex flex-wrap gap-2">
               {CHIPS.map(c => <span key={c} className="chip">{c}</span>)}
@@ -118,14 +117,14 @@ I am continuously improving my skills in Machine Learning, Data Analysis, and re
                 {/* Glow ring */}
                 <div
                   className="absolute -inset-1 rounded-full -z-10"
-                  style={{ background:'linear-gradient(135deg,var(--cyan),var(--violet))', opacity:.4, filter:'blur(8px)' }}
+                  style={{ background:'linear-gradient(135deg,var(--cyan),var(--violet))', opacity:.25, filter:'blur(8px)' }}
                 />
               </div>
 
               {/* Name + role */}
               <div className="text-center">
                 <div className="font-display font-bold text-xl">Hariom Gourh</div>
-                <div className="font-mono text-xs mt-1" style={{ color:'var(--cyan)' }}>AI/ML Engineer </div>
+                <div className="font-mono text-xs mt-1" style={{ color:'var(--cyan)' }}>AI/ML Engineer</div>
               </div>
 
               {/* Animated stats grid */}
@@ -134,7 +133,7 @@ I am continuously improving my skills in Machine Learning, Data Analysis, and re
                   <div
                     key={label}
                     className="text-center py-3 px-2 rounded-xl"
-                    style={{ background:'rgba(0,212,255,0.05)', border:'1px solid rgba(0,212,255,0.1)' }}
+                    style={{ background:'rgba(8,145,178,0.06)', border:'1px solid rgba(8,145,178,0.14)' }}
                   >
                     <div
                       className="font-display font-extrabold text-2xl"
@@ -153,7 +152,7 @@ I am continuously improving my skills in Machine Learning, Data Analysis, and re
               {/* Status */}
               <div className="flex items-center gap-2 text-sm font-mono" style={{ color:'var(--muted)' }}>
                 <span className="badge-dot" />
-               Open to internships & learning opportunities
+               Open to internships &amp; learning opportunities
               </div>
             </div>
           </div>
