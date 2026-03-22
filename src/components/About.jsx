@@ -2,33 +2,26 @@ import { useEffect, useRef } from 'react'
 import { useReveal } from '../hooks/useReveal'
 
 const CHIPS = [
- 'C','C++','Python',
-  'Data Structures','Algorithms',
-  'NumPy','Pandas','Machine Learning',
-  'Matplotlib','Seaborn','Power BI',
-  'Git','VS Code'
+  'C', 'C++', 'Python',
+  'Data Structures', 'Algorithms',
+  'NumPy', 'Pandas', 'Machine Learning',
+  'Matplotlib', 'Seaborn', 'Power BI',
+  'Git', 'VS Code'
 ]
 
 const STATS = [
-  { num: 3, suffix: '+', label: 'Projects'  },
-  { num: 1, suffix: '+', label: 'Years Learning' },
-  { num: 5, suffix: '+', label: 'Technologies'   },
-  { num: 100, suffix: '%', label: 'Learning Focus' },
+  { num: 3,   suffix: '+',  label: 'Projects'        },
+  { num: 1,   suffix: '+',  label: 'Years Learning'  },
+  { num: 5,   suffix: '+',  label: 'Technologies'    },
+  { num: 100, suffix: '%',  label: 'Learning Focus'  },
 ]
 
-/**
- * About
- * ─────
- * Two-column layout:
- *  Left  — text, tech chips
- *  Right — 3D tilt glass card with avatar + animated counters
- */
 export default function About() {
   const textRef    = useReveal()
   const cardRef    = useReveal()
   const counterEls = useRef([])
 
-  /* ── 3D Tilt on the card ── */
+  /* 3D tilt on the card */
   useEffect(() => {
     const card = cardRef.current
     if (!card) return
@@ -36,7 +29,7 @@ export default function About() {
       const r = card.getBoundingClientRect()
       const x = (e.clientX - r.left) / r.width  - 0.5
       const y = (e.clientY - r.top)  / r.height - 0.5
-      card.style.transform = `perspective(800px) rotateY(${x * 18}deg) rotateX(${-y * 18}deg) scale(1.02)`
+      card.style.transform = `perspective(800px) rotateY(${x * 16}deg) rotateX(${-y * 16}deg) scale(1.02)`
     }
     const onLeave = () => { card.style.transform = '' }
     card.addEventListener('mousemove', onMove)
@@ -44,7 +37,7 @@ export default function About() {
     return () => { card.removeEventListener('mousemove', onMove); card.removeEventListener('mouseleave', onLeave) }
   }, [])
 
-  /* ── Counter animation on scroll into view ── */
+  /* Counter animation */
   useEffect(() => {
     const obs = new IntersectionObserver(entries => {
       entries.forEach(entry => {
@@ -53,7 +46,7 @@ export default function About() {
         const target = parseInt(el.dataset.count)
         const suffix = el.dataset.suffix || ''
         let cur = 0
-        const step = target / 60
+        const step = target / 55
         const id = setInterval(() => {
           cur = Math.min(cur + step, target)
           el.textContent = Math.floor(cur) + suffix
@@ -62,7 +55,6 @@ export default function About() {
         obs.unobserve(el)
       })
     }, { threshold: 0.6 })
-
     counterEls.current.forEach(el => el && obs.observe(el))
     return () => obs.disconnect()
   }, [])
@@ -72,7 +64,7 @@ export default function About() {
       <div className="max-w-6xl mx-auto px-6 py-28">
         <div className="grid md:grid-cols-2 gap-16 items-center">
 
-          {/* ── LEFT: Text ── */}
+          {/* LEFT: Text */}
           <div ref={textRef} className="reveal">
             <div className="section-label">Who am I</div>
             <h2
@@ -80,18 +72,31 @@ export default function About() {
               style={{ fontSize:'clamp(2rem,5vw,3.2rem)' }}
             >
               Passionate about{' '}
-              <span className="gradient-text-cv">AI, Data Science</span> &amp; <span className="gradient-text-cv">Problem Solving</span>
+              <span className="gradient-text-cv">AI, Data Science</span>{' '}
+              &amp;{' '}
+              <span className="gradient-text-cv">Problem Solving</span>
             </h2>
-            <p className="text-base leading-8 mb-4" style={{ color:'var(--muted)' }}>
-              I'm a <strong style={{ color:'var(--text)' }}>B.Tech Computer Science</strong> student focused on becoming an <strong style={{ color:'var(--text)' }}>AI/ML Engineer. </strong>
 
-I have strong foundations in <strong style={{ color:'var(--text)' }}>Python, C++, and Data Structures &amp; Algorithms, </strong>and I build real-world projects using <strong style={{ color:'var(--text)' }}>Machine Learning and Data Analysis.</strong>
+            <p className="text-base leading-8 mb-4" style={{ color:'var(--muted)' }}>
+              I'm a{' '}
+              <strong style={{ color:'var(--text)', fontWeight:600 }}>B.Tech Computer Science</strong>{' '}
+              student focused on becoming an{' '}
+              <strong style={{ color:'var(--text)', fontWeight:600 }}>AI/ML Engineer.</strong>{' '}
+              I have strong foundations in{' '}
+              <strong style={{ color:'var(--text)', fontWeight:600 }}>Python, C++, and Data Structures &amp; Algorithms,</strong>{' '}
+              and I build real-world projects using{' '}
+              <strong style={{ color:'var(--text)', fontWeight:600 }}>Machine Learning and Data Analysis.</strong>
             </p>
+
+            <p className="text-base leading-8 mb-4" style={{ color:'var(--muted)' }}>
+              Currently, I am working on projects related to Agriculture AI, Rainfall Prediction, and
+              AI-based systems that solve real-world problems. I am continuously improving my skills in
+              Machine Learning, Data Analysis, and real-world AI applications.
+            </p>
+
             <p className="text-base leading-8 mb-7" style={{ color:'var(--muted)' }}>
-              Currently, I am working on projects related to Agriculture AI, Rainfall Prediction, and AI-based systems that solve real-world problems.
-I am continuously improving my skills in Machine Learning, Data Analysis, and real-world AI applications.
-</p>
-<p className="text-base leading-8 mb-7" style={{ color:'var(--muted)' }}>I am actively looking for AI/ML or Data Science internship opportunities.</p>
+              I am actively looking for <strong style={{ color:'var(--cyan)', fontWeight:600 }}>AI/ML or Data Science internship</strong> opportunities.
+            </p>
 
             {/* Tech chips */}
             <div className="flex flex-wrap gap-2">
@@ -99,41 +104,40 @@ I am continuously improving my skills in Machine Learning, Data Analysis, and re
             </div>
           </div>
 
-          {/* ── RIGHT: 3D Card ── */}
+          {/* RIGHT: 3D Card */}
           <div className="flex justify-center">
             <div
               ref={cardRef}
-              className="glass-card reveal flex flex-col items-center gap-5 p-8 transition-transform duration-150"
-              style={{ width:300, transformStyle:'preserve-3d' }}
+              className="glass-card reveal flex flex-col items-center gap-5 p-8"
+              style={{ width:300, transformStyle:'preserve-3d', transition:'transform 0.15s ease' }}
             >
               {/* Avatar */}
               <div className="relative">
                 <div
-                  className="w-24 h-24 rounded-full flex items-center justify-center font-display font-extrabold text-3xl text-white"
-                  style={{ background:'linear-gradient(135deg, var(--cyan), var(--violet))' }}
+                  className="w-24 h-24 rounded-full flex items-center justify-center font-display font-extrabold text-3xl text-white select-none"
+                  style={{ background:'linear-gradient(135deg,var(--cyan),var(--violet))' }}
                 >
                   HG
                 </div>
-                {/* Glow ring */}
                 <div
-                  className="absolute -inset-1 rounded-full -z-10"
-                  style={{ background:'linear-gradient(135deg,var(--cyan),var(--violet))', opacity:.25, filter:'blur(8px)' }}
+                  className="absolute -inset-1.5 rounded-full -z-10"
+                  style={{ background:'linear-gradient(135deg,var(--cyan),var(--violet))', opacity:.3, filter:'blur(10px)' }}
                 />
               </div>
 
               {/* Name + role */}
               <div className="text-center">
-                <div className="font-display font-bold text-xl">Hariom Gourh</div>
-                <div className="font-mono text-xs mt-1" style={{ color:'var(--cyan)' }}>AI/ML Engineer</div>
+                <div className="font-display font-bold text-xl" style={{ color:'var(--text)' }}>Hariom Gourh</div>
+                <div className="font-mono text-xs mt-1.5" style={{ color:'var(--cyan)' }}>AI/ML Engineer</div>
               </div>
 
-              {/* Animated stats grid */}
+              {/* Stats grid */}
               <div className="grid grid-cols-2 gap-3 w-full">
                 {STATS.map(({ num, suffix, label }) => (
                   <div
                     key={label}
                     className="text-center py-3 px-2 rounded-xl"
-                    style={{ background:'rgba(8,145,178,0.06)', border:'1px solid rgba(8,145,178,0.14)' }}
+                    style={{ background:'var(--cyan-dim)', border:'1px solid rgba(56,189,248,.15)' }}
                   >
                     <div
                       className="font-display font-extrabold text-2xl"
@@ -150,9 +154,9 @@ I am continuously improving my skills in Machine Learning, Data Analysis, and re
               </div>
 
               {/* Status */}
-              <div className="flex items-center gap-2 text-sm font-mono" style={{ color:'var(--muted)' }}>
-                <span className="badge-dot" />
-               Open to internships &amp; learning opportunities
+              <div className="flex items-center gap-2 text-xs font-mono text-center" style={{ color:'var(--muted)' }}>
+                <span className="badge-dot flex-shrink-0" />
+                Open to internships &amp; learning opportunities
               </div>
             </div>
           </div>

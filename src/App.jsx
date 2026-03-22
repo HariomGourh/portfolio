@@ -12,6 +12,26 @@ import Contact         from './components/Contact'
 export default function App() {
   const [progress, setProgress] = useState(0)
 
+  /* ── Theme: persist to localStorage, default dark ── */
+  const [theme, setTheme] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('hg-theme') || 'dark'
+    }
+    return 'dark'
+  })
+
+  const toggleTheme = () => {
+    const next = theme === 'dark' ? 'light' : 'dark'
+    setTheme(next)
+    document.documentElement.setAttribute('data-theme', next)
+    localStorage.setItem('hg-theme', next)
+  }
+
+  /* Apply theme on mount */
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme)
+  }, []) // eslint-disable-line
+
   /* ── Scroll progress bar ── */
   useEffect(() => {
     const onScroll = () => {
@@ -25,22 +45,22 @@ export default function App() {
 
   return (
     <>
-      {/* ── Scroll progress bar (top of page) ── */}
+      {/* Scroll progress bar */}
       <div className="progress-bar" style={{ width: `${progress}%` }} />
 
-      {/* ── Custom animated cursor ── */}
+      {/* Custom cursor */}
       <Cursor />
 
-      {/* ── Three.js particle background (fixed layer) ── */}
-      <ThreeBackground />
+      {/* Three.js particle background (fixed) */}
+      <ThreeBackground theme={theme} />
 
-      {/* ── Gradient mesh blobs (fixed layer) ── */}
+      {/* Gradient mesh blobs (fixed) */}
       <div className="mesh-bg" />
 
-      {/* ── Sticky navbar ── */}
-      <Navbar />
+      {/* Sticky navbar */}
+      <Navbar theme={theme} toggleTheme={toggleTheme} />
 
-      {/* ── All page sections ── */}
+      {/* Page sections */}
       <main style={{ position: 'relative', zIndex: 1 }}>
         <Hero />
         <About />
@@ -50,10 +70,10 @@ export default function App() {
         <Contact />
       </main>
 
-      {/* ── Footer ── */}
+      {/* Footer */}
       <footer
         className="relative z-10 text-center py-10 text-sm"
-        style={{ borderTop: '1px solid rgba(15,23,42,0.08)', color: 'var(--muted)' }}
+        style={{ borderTop: '1px solid var(--border)', color: 'var(--muted)' }}
       >
         <p>
           Designed &amp; built with{' '}
@@ -61,7 +81,7 @@ export default function App() {
           <span style={{ color: 'var(--cyan)' }}>Hariom Gourh</span> ·{' '}
           {new Date().getFullYear()}
         </p>
-        <p className="mt-1 text-xs" style={{ color: 'rgba(100,116,139,0.55)' }}>
+        <p className="mt-1 text-xs" style={{ color: 'var(--muted)', opacity: 0.5 }}>
           React · Three.js · Tailwind CSS
         </p>
       </footer>
