@@ -1,12 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
 
-/**
- * Cursor
- * ──────
- * • Small dot    — tracks mouse exactly
- * • Larger ring  — follows with lerp lag
- * • Ring expands + changes colour on interactive elements
- */
 export default function Cursor() {
   const cursorRef = useRef(null)
   const trailRef  = useRef(null)
@@ -14,7 +7,6 @@ export default function Cursor() {
   const pos = useRef({ cx: 0, cy: 0, tx: 0, ty: 0 })
 
   useEffect(() => {
-    /* Track position */
     const onMove = (e) => {
       pos.current.cx = e.clientX
       pos.current.cy = e.clientY
@@ -25,19 +17,17 @@ export default function Cursor() {
     }
     document.addEventListener('mousemove', onMove)
 
-    /* Hide on leave / show on enter */
     const onLeave = () => {
       if (cursorRef.current) cursorRef.current.style.opacity = '0'
       if (trailRef.current)  trailRef.current.style.opacity  = '0'
     }
     const onEnter = () => {
       if (cursorRef.current) cursorRef.current.style.opacity = '1'
-      if (trailRef.current)  trailRef.current.style.opacity  = '0.75'
+      if (trailRef.current)  trailRef.current.style.opacity  = '1'
     }
     document.addEventListener('mouseleave', onLeave)
     document.addEventListener('mouseenter', onEnter)
 
-    /* Lerp loop */
     let animId
     const lerp = (a, b, n) => (1 - n) * a + n * b
     const loop = () => {
@@ -51,11 +41,9 @@ export default function Cursor() {
     }
     loop()
 
-    /* Hover detection */
     const addH = () => setHovered(true)
     const remH = () => setHovered(false)
-    const sel  = 'a, button, .glass-card, .social-btn, .chip, .stack-tag, input, textarea'
-    const els  = document.querySelectorAll(sel)
+    const els  = document.querySelectorAll('a, button, .card, .glass-card, .social-btn, .chip, .stack-tag, input, textarea')
     els.forEach(el => { el.addEventListener('mouseenter', addH); el.addEventListener('mouseleave', remH) })
 
     return () => {
@@ -69,7 +57,7 @@ export default function Cursor() {
 
   return (
     <>
-      <div className="cursor"                               ref={cursorRef} />
+      <div className="cursor" ref={cursorRef} />
       <div className={`cursor-trail ${hovered ? 'hovered' : ''}`} ref={trailRef} />
     </>
   )

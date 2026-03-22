@@ -13,32 +13,32 @@ export default function Hero() {
   const [displayed, setDisplayed] = useState('')
   const [deleting,  setDeleting]  = useState(false)
   const [imgError,  setImgError]  = useState(false)
-  const magneticRefs = useRef([])
+  const btnRefs = useRef([])
 
-  /* ── Typewriter ── */
+  /* Typewriter */
   useEffect(() => {
     const target = ROLES[roleIdx]
     let t
-    if (!deleting && displayed.length < target.length) {
-      t = setTimeout(() => setDisplayed(target.slice(0, displayed.length + 1)), 80)
-    } else if (!deleting && displayed.length === target.length) {
-      t = setTimeout(() => setDeleting(true), 2200)
-    } else if (deleting && displayed.length > 0) {
-      t = setTimeout(() => setDisplayed(displayed.slice(0, -1)), 38)
-    } else if (deleting && displayed.length === 0) {
+    if (!deleting && displayed.length < target.length)
+      t = setTimeout(() => setDisplayed(target.slice(0, displayed.length + 1)), 78)
+    else if (!deleting && displayed.length === target.length)
+      t = setTimeout(() => setDeleting(true), 2100)
+    else if (deleting && displayed.length > 0)
+      t = setTimeout(() => setDisplayed(displayed.slice(0, -1)), 36)
+    else if (deleting && displayed.length === 0) {
       setDeleting(false)
       setRoleIdx(i => (i + 1) % ROLES.length)
     }
     return () => clearTimeout(t)
   }, [displayed, deleting, roleIdx])
 
-  /* ── Magnetic CTA buttons ── */
+  /* Magnetic buttons */
   useEffect(() => {
-    const cleanup = magneticRefs.current.filter(Boolean).map(btn => {
+    const cleanup = btnRefs.current.filter(Boolean).map(btn => {
       const onMove = (e) => {
         const r = btn.getBoundingClientRect()
-        const x = (e.clientX - r.left - r.width  / 2) * 0.26
-        const y = (e.clientY - r.top  - r.height / 2) * 0.26
+        const x = (e.clientX - r.left - r.width  / 2) * 0.25
+        const y = (e.clientY - r.top  - r.height / 2) * 0.25
         btn.style.transform = `translate(${x}px,${y}px) translateY(-3px)`
       }
       const onLeave = () => { btn.style.transform = '' }
@@ -50,165 +50,158 @@ export default function Hero() {
   }, [])
 
   return (
-    <section id="hero" className="relative min-h-screen flex items-center px-6 pt-28 pb-16 z-10">
+    <section id="hero" className="relative min-h-screen flex flex-col justify-center px-6 pt-24 pb-12 z-10 overflow-hidden">
 
-      {/* Ambient blobs */}
-      <div className="floating-shape" style={{ width:340,height:340, background:'rgba(56,189,248,0.07)',   top:'-60px',  right:'-60px',  animationDelay:'0s'  }} />
-      <div className="floating-shape" style={{ width:240,height:240, background:'rgba(167,139,250,0.07)', bottom:'10%', left:'-50px',   animationDelay:'2.2s'}} />
-      <div className="floating-shape" style={{ width:180,height:180, background:'rgba(251,113,133,0.06)', top:'38%',    right:'5%',     animationDelay:'4s'  }} />
+      {/* Ambient bg shapes */}
+      <div className="floating-shape" style={{ width:400, height:400, background:'rgba(155,122,244,0.07)', top:'-120px', right:'-100px', animationDelay:'0s' }} />
+      <div className="floating-shape" style={{ width:300, height:300, background:'rgba(200,255,0,0.04)',   bottom:'0',   left:'-80px',  animationDelay:'3s'  }} />
 
-      <div className="max-w-6xl mx-auto w-full grid md:grid-cols-2 gap-14 lg:gap-20 items-center">
+      <div className="max-w-6xl mx-auto w-full">
 
-        {/* ── LEFT: Text ── */}
-        <div className="order-2 md:order-1">
-
-          {/* Badge */}
-          <div className="hero-badge mb-6 w-fit" style={{ animation:'fadeUp .9s ease both' }}>
+        {/* Top row: badge + role tag */}
+        <div
+          className="flex flex-wrap items-center justify-between gap-4 mb-10"
+          style={{ animation: 'fadeUp .8s ease both' }}
+        >
+          <div className="hero-badge">
             <span className="badge-dot" />
             <span>Available for internships &amp; AI/ML opportunities</span>
           </div>
-
-          {/* Name headline */}
-          <h1
-            className="font-display font-extrabold leading-[1.02] mb-4"
-            style={{
-              fontSize: 'clamp(2.8rem,7vw,5.4rem)',
-              animation: 'fadeUp .9s .15s ease both',
-              animationFillMode: 'both',
-            }}
-          >
-            <span className="block" style={{ color:'var(--text)', opacity:.65, fontSize:'0.55em', fontWeight:600, letterSpacing:'.05em', fontFamily:"'JetBrains Mono',monospace", marginBottom:'.3em' }}>
-              HELLO, I'M
-            </span>
-            <span className="block gradient-text">Hariom Gourh</span>
-          </h1>
-
-          {/* Typewriter */}
           <div
-            className="font-mono text-base mb-6 flex items-center gap-1"
-            style={{ color:'var(--cyan)', animation:'fadeUp .9s .3s ease both', animationFillMode:'both', minHeight:'1.8rem' }}
+            className="font-mono text-xs tracking-widest hidden sm:block"
+            style={{ color: 'var(--muted)' }}
           >
-            <span style={{ opacity:.5 }}>&lt;</span>
-            <span>{displayed}</span>
-            <span style={{ animation:'blink 1s step-end infinite' }}>|</span>
-            <span style={{ opacity:.5 }}>/&gt;</span>
-          </div>
-
-          {/* Description */}
-          <p
-            className="text-base leading-relaxed mb-8 max-w-lg"
-            style={{ color:'var(--muted)', animation:'fadeUp .9s .45s ease both', animationFillMode:'both', lineHeight:1.8 }}
-          >
-            I build{' '}
-            <strong style={{ color:'var(--text)', fontWeight:600 }}>AI-powered solutions</strong>
-            {' '}using Machine Learning, Data Analysis and real-world datasets.
-            Focused on DSA, Python and building real-world AI projects in Agriculture and Automation.
-          </p>
-
-          {/* CTAs */}
-          <div
-            className="flex flex-wrap gap-4"
-            style={{ animation:'fadeUp .9s .6s ease both', animationFillMode:'both' }}
-          >
-            <a href="#projects" className="btn-primary" ref={el => (magneticRefs.current[0] = el)}>
-              <span>View My Work →</span>
-            </a>
-            <a href="#contact" className="btn-secondary" ref={el => (magneticRefs.current[1] = el)}>
-              Get in Touch
-            </a>
-          </div>
-
-          {/* Scroll hint */}
-          <div
-            className="flex flex-col items-start gap-2 mt-12"
-            style={{ animation:'fadeUp .9s .9s ease both', animationFillMode:'both' }}
-          >
-            <span className="font-mono text-[10px] tracking-[3px]" style={{ color:'var(--muted)' }}>SCROLL</span>
-            <div className="scroll-line-anim" />
+            BASED IN INDIA · GWALIOR
           </div>
         </div>
 
-        {/* ── RIGHT: Profile ── */}
-        <div
-          className="order-1 md:order-2 flex justify-center items-center"
-          style={{ animation:'fadeUp .9s .2s ease both', animationFillMode:'both' }}
-        >
-          <div className="relative flex justify-center items-center" style={{ width:380, height:380 }}>
+        {/* ── Main grid: text 60% | photo 40% ── */}
+        <div className="grid md:grid-cols-[1fr_auto] gap-10 lg:gap-16 items-start">
 
-            {/* Outer dashed orbit */}
-            <div
-              className="absolute rounded-full"
-              style={{
-                width:376, height:376,
-                border:'1px dashed rgba(56,189,248,0.22)',
-                animation:'ringSpin 18s linear infinite',
-              }}
-            />
+          {/* LEFT: Text stack */}
+          <div style={{ animation: 'fadeUp .85s .12s ease both', animationFillMode: 'both' }}>
 
-            {/* Spinning gradient ring */}
-            <div
-              className="absolute rounded-full"
-              style={{
-                width:348, height:348,
-                background:'conic-gradient(from 0deg,var(--cyan),var(--violet),var(--coral),var(--amber),var(--cyan))',
-                padding:3,
-                animation:'ringSpin 5s linear infinite',
-              }}
-            />
-
-            {/* BG disc (covers inner ring stroke) */}
-            <div className="absolute rounded-full" style={{ width:334, height:334, background:'var(--bg)' }} />
-
-            {/* Glow blob */}
-            <div
-              className="absolute rounded-full"
-              style={{
-                width:280, height:280,
-                background:'radial-gradient(circle,rgba(167,139,250,.2) 0%,transparent 70%)',
-                filter:'blur(28px)',
-              }}
-            />
-
-            {/* Profile image */}
-            <div
-              className="absolute rounded-full overflow-hidden z-10"
-              style={{ width:328, height:328, top:'50%', left:'50%', transform:'translate(-50%,-50%)' }}
+            {/* MASSIVE name */}
+            <h1
+              className="font-display font-extrabold leading-none mb-4 tracking-tight"
+              style={{ fontSize: 'clamp(3.8rem, 9.5vw, 7.5rem)', letterSpacing: '-0.03em' }}
             >
-              {!imgError && profileImg ? (
-                <img
-                  src={profileImg}
-                  alt="Hariom Gourh"
-                  className="w-full h-full object-cover object-[center_top]"
-                  onError={() => setImgError(true)}
-                />
-              ) : (
-                <div
-                  className="w-full h-full flex items-center justify-center font-display font-extrabold text-5xl text-white"
-                  style={{ background:'linear-gradient(135deg,var(--cyan),var(--violet))' }}
-                >
-                  HG
+              <span className="block" style={{ color: 'var(--text)' }}>Hariom</span>
+              <span className="block gradient-text">Gourh</span>
+            </h1>
+
+            {/* Typewriter role */}
+            <div
+              className="flex items-center gap-2 mb-7"
+              style={{ color: 'var(--accent)', fontFamily: "'JetBrains Mono', monospace", fontSize: '1rem', minHeight: '1.8rem' }}
+            >
+              <span style={{ color: 'var(--muted)' }}>/</span>
+              <span>{displayed}</span>
+              <span style={{ animation: 'blink 1s step-end infinite' }}>▌</span>
+            </div>
+
+            {/* Divider line */}
+            <div style={{ width: 60, height: 2, background: 'linear-gradient(90deg, var(--lime), transparent)', marginBottom: '1.5rem' }} />
+
+            {/* Description */}
+            <p
+              className="text-base max-w-xl mb-8"
+              style={{ color: 'var(--muted)', lineHeight: 1.85, fontSize: 'clamp(.9rem, 1.8vw, 1.05rem)' }}
+            >
+              I build{' '}
+              <strong style={{ color: 'var(--text)', fontWeight: 600 }}>AI-powered solutions</strong>
+              {' '}using Machine Learning, Data Analysis and real-world datasets.
+              Focused on DSA, Python and building real-world AI projects in
+              Agriculture and Automation.
+            </p>
+
+            {/* CTA row */}
+            <div className="flex flex-wrap gap-4 mb-12">
+              <a href="#projects" className="btn-primary" ref={el => (btnRefs.current[0] = el)}>
+                <span>View My Work →</span>
+              </a>
+              <a href="#contact" className="btn-secondary" ref={el => (btnRefs.current[1] = el)}>
+                Get in Touch
+              </a>
+            </div>
+
+            {/* Stats row */}
+            <div
+              className="flex flex-wrap gap-10"
+              style={{ paddingTop: '1.5rem', borderTop: '1px solid var(--line)' }}
+            >
+              {[
+                { num: '3+', label: 'Projects Built' },
+                { num: '1+', label: 'Years Learning' },
+                { num: '5+', label: 'Technologies' },
+              ].map(s => (
+                <div key={s.label} className="stat-item">
+                  <span className="stat-num">{s.num}</span>
+                  <span className="stat-label">{s.label}</span>
                 </div>
-              )}
-            </div>
-
-            {/* Badge: status */}
-            <div
-              className="glass-card absolute flex items-center gap-2 text-sm font-mono px-4 py-2 z-20"
-              style={{ bottom:-30, right:-70, borderRadius:50 }}
-            >
-              <span style={{ color:'var(--cyan)' }}>⚡</span>
-              <span style={{ color:'var(--text)' }}>Fresher | AI/ML Projects</span>
-            </div>
-
-            {/* Badge: open to work */}
-            <div
-              className="glass-card absolute flex items-center gap-2 text-sm font-mono px-4 py-2 z-20"
-              style={{ top:30, left:30, borderRadius:50 }}
-            >
-              <span className="badge-dot" />
-              <span style={{ color:'var(--text)' }}>Open to work</span>
+              ))}
             </div>
           </div>
+
+          {/* RIGHT: Profile image with spinning border */}
+          <div
+            className="flex justify-center items-start md:items-center"
+            style={{ animation: 'fadeUp .85s .25s ease both', animationFillMode: 'both', paddingTop: '0.5rem' }}
+          >
+            <div className="profile-ring-wrap" style={{ width: 'clamp(220px, 30vw, 310px)', height: 'clamp(260px, 36vw, 370px)' }}>
+              <div
+                className="profile-ring-inner"
+                style={{ width: '100%', height: '100%' }}
+              >
+                {!imgError && profileImg ? (
+                  <img
+                    src={profileImg}
+                    alt="Hariom Gourh"
+                    style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top', display: 'block' }}
+                    onError={() => setImgError(true)}
+                  />
+                ) : (
+                  <div
+                    style={{
+                      width: '100%', height: '100%',
+                      display: 'flex', alignItems: 'center', justifyContent: 'center',
+                      background: 'linear-gradient(135deg, var(--bg3), var(--surface))',
+                      fontFamily: "'Syne', sans-serif", fontWeight: 800,
+                      fontSize: '3.5rem', color: 'var(--accent)',
+                    }}
+                  >
+                    HG
+                  </div>
+                )}
+              </div>
+              {/* Floating label on profile */}
+              <div
+                style={{
+                  position: 'absolute', bottom: -14, left: '50%', transform: 'translateX(-50%)',
+                  background: 'var(--surface)', border: '1px solid var(--line)',
+                  borderRadius: 50, padding: '.35rem 1rem', whiteSpace: 'nowrap',
+                  fontFamily: "'JetBrains Mono', monospace", fontSize: '.74rem',
+                  color: 'var(--lime)', boxShadow: '0 4px 16px rgba(0,0,0,.4)',
+                  display: 'flex', alignItems: 'center', gap: '.4rem',
+                  zIndex: 10,
+                }}
+              >
+                <span
+                  style={{ width: 6, height: 6, background: 'var(--green)', borderRadius: '50%', boxShadow: '0 0 6px var(--green)' }}
+                />
+                Fresher | AI/ML Projects
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Scroll indicator */}
+        <div
+          className="flex flex-col items-start gap-2 mt-16"
+          style={{ animation: 'fadeUp .85s .8s ease both', animationFillMode: 'both' }}
+        >
+          <span className="font-mono text-[10px] tracking-[3.5px]" style={{ color: 'var(--muted)' }}>SCROLL</span>
+          <div className="scroll-line-anim" />
         </div>
       </div>
     </section>

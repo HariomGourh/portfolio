@@ -3,31 +3,31 @@ import { useReveal } from '../hooks/useReveal'
 
 const JOBS = [
   {
-    date: '2025 — Present',
-    role: 'AI/ML Learner & Project Developer',
+    date:    '2025 — Present',
+    role:    'AI/ML Learner & Project Developer',
     company: 'Self-Driven Learning',
-    desc: 'Building real-world AI/ML projects including rainfall prediction, smart agriculture systems, and AI chatbot solutions, with a focus on solving practical problems using data-driven approaches.',
-    tags: ['Python','Machine Learning','Data Analysis','PyTorch'],
-    icon: '🚀',
-    color: 'var(--cyan)',
+    desc:    'Building real-world AI/ML projects including rainfall prediction, smart agriculture systems, and AI chatbot solutions, with a focus on solving practical problems using data-driven approaches.',
+    tags:    ['Python', 'Machine Learning', 'Data Analysis', 'PyTorch'],
+    icon:    '🚀',
+    accent:  'var(--lime)',
   },
   {
-    date: '2024 — 2025',
-    role: 'B.Tech Computer Science Student',
+    date:    '2024 — 2025',
+    role:    'B.Tech Computer Science Student',
     company: 'MITS Gwalior',
-    desc: 'Developing strong foundations in programming, Data Structures & Algorithms, DBMS and Computer Networks while working on practical AI-based projects.',
-    tags: ['C++','DSA','DBMS','Computer Networks'],
-    icon: '🎓',
-    color: 'var(--violet)',
+    desc:    'Developing strong foundations in programming, Data Structures & Algorithms, DBMS and Computer Networks while working on practical AI-based projects.',
+    tags:    ['C++', 'DSA', 'DBMS', 'Computer Networks'],
+    icon:    '🎓',
+    accent:  'var(--accent)',
   },
   {
-    date: '2023 — 2024',
-    role: 'Programming & Problem Solving Beginner',
+    date:    '2023 — 2024',
+    role:    'Programming & Problem Solving Beginner',
     company: 'Learning Phase',
-    desc: 'Built strong logical thinking and problem-solving skills through consistent practice and hands-on projects.',
-    tags: ['C','C++','Problem Solving'],
-    icon: '💡',
-    color: 'var(--amber)',
+    desc:    'Built strong logical thinking and problem-solving skills through consistent practice and hands-on projects.',
+    tags:    ['C', 'C++', 'Problem Solving'],
+    icon:    '💡',
+    accent:  'var(--amber)',
   },
 ]
 
@@ -37,78 +37,89 @@ export default function Experience() {
 
   useEffect(() => {
     const obs = new IntersectionObserver(entries => {
-      entries.forEach(e => {
-        if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target) }
-      })
-    }, { threshold: 0.18 })
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target) } })
+    }, { threshold: 0.15 })
     itemRefs.current.forEach(el => el && obs.observe(el))
     return () => obs.disconnect()
   }, [])
 
   return (
-    <section
-      id="experience"
-      className="relative z-10 section-alt"
-    >
-      <div className="max-w-3xl mx-auto px-6 py-28">
+    <section id="experience" className="relative z-10 overflow-hidden section-alt">
+      <span className="section-ghost-num">04</span>
 
-        {/* Heading */}
+      <div className="max-w-5xl mx-auto px-6 py-28">
         <div ref={headRef} className="reveal mb-14">
           <div className="section-label">My Journey</div>
-          <h2 className="font-display font-extrabold leading-tight" style={{ fontSize:'clamp(2rem,5vw,3.2rem)' }}>
+          <h2
+            className="font-display font-extrabold"
+            style={{ fontSize: 'clamp(2.4rem, 5vw, 3.8rem)', letterSpacing: '-0.03em', lineHeight: 1.1 }}
+          >
             My <span className="gradient-text-cv">Journey</span>
           </h2>
-          <p className="mt-3 text-base" style={{ color:'var(--muted)' }}>
+          <p className="mt-3 text-base max-w-xl" style={{ color: 'var(--muted)', lineHeight: 1.8 }}>
             My journey of learning, building and growing in AI/ML and software development.
           </p>
         </div>
 
-        {/* Timeline */}
-        <div className="relative pl-8">
-          <div className="timeline-line" />
-
+        <div className="flex flex-col gap-5">
           {JOBS.map((job, i) => (
             <div
               key={job.company}
               ref={el => (itemRefs.current[i] = el)}
-              className="timeline-item reveal relative mb-10 pl-8"
-              style={{ transitionDelay:`${i * 0.15}s` }}
+              className="card reveal"
+              style={{
+                transitionDelay: `${i * 0.12}s`,
+                paddingLeft: '0',
+                overflow: 'hidden',
+              }}
             >
-              {/* Dot */}
-              <div className="timeline-dot" />
-
-              {/* Card */}
+              {/* Accent stripe */}
               <div
-                className="glass-card p-6"
-                style={{ '--hover-translate': '0px' }}
-              >
-                {/* Header row */}
-                <div className="flex items-start justify-between gap-3 mb-3">
-                  <div>
-                    <div className="font-mono text-[11px] tracking-widest mb-1.5" style={{ color: job.color }}>
-                      {job.date}
-                    </div>
-                    <div className="font-display font-bold text-lg leading-snug" style={{ color:'var(--text)' }}>
-                      {job.role}
-                    </div>
-                    <div className="font-medium text-sm mt-1" style={{ color: job.color }}>
-                      {job.company}
-                    </div>
-                  </div>
-                  <div
-                    className="text-2xl select-none flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center"
-                    style={{ background: `rgba(${job.color === 'var(--cyan)' ? '56,189,248' : job.color === 'var(--violet)' ? '167,139,250' : '251,191,36'}, 0.1)` }}
-                  >
-                    {job.icon}
-                  </div>
+                style={{
+                  position: 'absolute', left: 0, top: 0, bottom: 0, width: 3,
+                  background: job.accent,
+                  boxShadow: `0 0 12px ${job.accent}60`,
+                }}
+              />
+
+              <div className="flex flex-col md:flex-row md:items-start gap-5 p-6 pl-8">
+                {/* Icon badge */}
+                <div
+                  className="flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center text-xl select-none"
+                  style={{ background: 'var(--bg2)', border: '1px solid var(--line)' }}
+                >
+                  {job.icon}
                 </div>
 
-                <p className="text-sm leading-relaxed mb-4" style={{ color:'var(--muted)', lineHeight:1.75 }}>
-                  {job.desc}
-                </p>
+                {/* Content */}
+                <div className="flex-1 min-w-0">
+                  <div className="flex flex-wrap items-start justify-between gap-2 mb-1">
+                    <div>
+                      <div
+                        className="font-display font-bold text-lg leading-snug"
+                        style={{ color: 'var(--text)', letterSpacing: '-0.02em' }}
+                      >
+                        {job.role}
+                      </div>
+                      <div className="font-medium text-sm mt-0.5" style={{ color: job.accent }}>
+                        {job.company}
+                      </div>
+                    </div>
+                    <div
+                      className="text-xs font-mono px-2.5 py-1 rounded-lg flex-shrink-0"
+                      style={{ background: 'var(--bg2)', border: '1px solid var(--line)', color: 'var(--muted)', letterSpacing: '1px' }}
+                    >
+                      {job.date}
+                    </div>
+                  </div>
 
-                <div className="flex flex-wrap gap-2">
-                  {job.tags.map(t => <span key={t} className="stack-tag">{t}</span>)}
+                  <p className="text-sm mt-3 mb-4" style={{ color: 'var(--muted)', lineHeight: 1.8 }}>
+                    {job.desc}
+                  </p>
+
+                  <div className="flex flex-wrap gap-2">
+                    {job.tags.map(t => <span key={t} className="stack-tag">{t}</span>)}
+                  </div>
                 </div>
               </div>
             </div>

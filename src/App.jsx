@@ -12,7 +12,6 @@ import Contact         from './components/Contact'
 export default function App() {
   const [progress, setProgress] = useState(0)
 
-  /* ── Theme: persist to localStorage, default dark ── */
   const [theme, setTheme] = useState(() => {
     if (typeof window !== 'undefined') {
       return localStorage.getItem('hg-theme') || 'dark'
@@ -27,12 +26,10 @@ export default function App() {
     localStorage.setItem('hg-theme', next)
   }
 
-  /* Apply theme on mount */
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme)
   }, []) // eslint-disable-line
 
-  /* ── Scroll progress bar ── */
   useEffect(() => {
     const onScroll = () => {
       const pct =
@@ -45,43 +42,37 @@ export default function App() {
 
   return (
     <>
-      {/* Scroll progress bar */}
       <div className="progress-bar" style={{ width: `${progress}%` }} />
-
-      {/* Custom cursor */}
       <Cursor />
-
-      {/* Three.js particle background (fixed) */}
       <ThreeBackground theme={theme} />
-
-      {/* Gradient mesh blobs (fixed) */}
       <div className="mesh-bg" />
-
-      {/* Sticky navbar */}
       <Navbar theme={theme} toggleTheme={toggleTheme} />
 
-      {/* Page sections */}
       <main style={{ position: 'relative', zIndex: 1 }}>
         <Hero />
+        <div className="section-divider" />
         <About />
+        <div className="section-divider" />
         <Skills />
+        <div className="section-divider" />
         <Projects />
+        <div className="section-divider" />
         <Experience />
+        <div className="section-divider" />
         <Contact />
       </main>
 
-      {/* Footer */}
       <footer
-        className="relative z-10 text-center py-10 text-sm"
-        style={{ borderTop: '1px solid var(--border)', color: 'var(--muted)' }}
+        className="relative z-10 text-center py-10"
+        style={{ borderTop: '1px solid var(--line)' }}
       >
-        <p>
+        <p className="text-sm" style={{ color: 'var(--muted)' }}>
           Designed &amp; built with{' '}
-          <span style={{ color: 'var(--coral)' }}>♥</span> by{' '}
-          <span style={{ color: 'var(--cyan)' }}>Hariom Gourh</span> ·{' '}
-          {new Date().getFullYear()}
+          <span style={{ color: 'var(--rose)' }}>♥</span> by{' '}
+          <span style={{ color: 'var(--lime)', fontFamily: "'Syne', sans-serif", fontWeight: 700 }}>Hariom Gourh</span>{' '}
+          · {new Date().getFullYear()}
         </p>
-        <p className="mt-1 text-xs" style={{ color: 'var(--muted)', opacity: 0.5 }}>
+        <p className="mt-1 text-xs" style={{ color: 'var(--muted)', opacity: .45 }}>
           React · Three.js · Tailwind CSS
         </p>
       </footer>
