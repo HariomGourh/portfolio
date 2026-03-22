@@ -12,12 +12,9 @@ import Contact         from './components/Contact'
 export default function App() {
   const [progress, setProgress] = useState(0)
 
-  const [theme, setTheme] = useState(() => {
-    if (typeof window !== 'undefined') {
-      return localStorage.getItem('hg-theme') || 'dark'
-    }
-    return 'dark'
-  })
+  const [theme, setTheme] = useState(() =>
+    typeof window !== 'undefined' ? (localStorage.getItem('hg-theme') || 'dark') : 'dark'
+  )
 
   const toggleTheme = () => {
     const next = theme === 'dark' ? 'light' : 'dark'
@@ -31,13 +28,12 @@ export default function App() {
   }, []) // eslint-disable-line
 
   useEffect(() => {
-    const onScroll = () => {
-      const pct =
-        (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100
+    const fn = () => {
+      const pct = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100
       setProgress(Math.min(pct, 100))
     }
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
+    window.addEventListener('scroll', fn, { passive: true })
+    return () => window.removeEventListener('scroll', fn)
   }, [])
 
   return (
@@ -46,33 +42,29 @@ export default function App() {
       <Cursor />
       <ThreeBackground theme={theme} />
       <div className="mesh-bg" />
+      <div className="mesh-bg-mid" />
       <Navbar theme={theme} toggleTheme={toggleTheme} />
 
       <main style={{ position: 'relative', zIndex: 1 }}>
         <Hero />
-        <div className="section-divider" />
         <About />
-        <div className="section-divider" />
         <Skills />
-        <div className="section-divider" />
         <Projects />
-        <div className="section-divider" />
         <Experience />
-        <div className="section-divider" />
         <Contact />
       </main>
 
       <footer
-        className="relative z-10 text-center py-10"
-        style={{ borderTop: '1px solid var(--line)' }}
+        className="relative z-10 text-center py-10 text-sm"
+        style={{ borderTop: '1px solid var(--border)', color: 'var(--muted)' }}
       >
-        <p className="text-sm" style={{ color: 'var(--muted)' }}>
+        <p>
           Designed &amp; built with{' '}
-          <span style={{ color: 'var(--rose)' }}>♥</span> by{' '}
-          <span style={{ color: 'var(--lime)', fontFamily: "'Syne', sans-serif", fontWeight: 700 }}>Hariom Gourh</span>{' '}
+          <span style={{ color: 'var(--pink)' }}>♥</span> by{' '}
+          <span className="gradient-text-cv font-semibold">Hariom Gourh</span>{' '}
           · {new Date().getFullYear()}
         </p>
-        <p className="mt-1 text-xs" style={{ color: 'var(--muted)', opacity: .45 }}>
+        <p className="mt-1 text-xs" style={{ color: 'var(--muted)', opacity: .5 }}>
           React · Three.js · Tailwind CSS
         </p>
       </footer>
